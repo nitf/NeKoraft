@@ -1,0 +1,6 @@
+{
+    "name": "nekoserver/nekoraft",
+    "description": "NekoServer`s main system plugin.",
+    "license": "GPL",
+    "require": {}
+}

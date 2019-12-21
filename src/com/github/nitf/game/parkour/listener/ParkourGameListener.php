@@ -2,8 +2,11 @@
 
 namespace com\github\nitf\game\parkour\listener;
 
+use com\github\nitf\game\parkour\event\FinishParkourEvent;
+use com\github\nitf\game\parkour\event\StartParkourEvent;
 use com\github\nitf\game\parkour\event\UserRegisterEvent;
 use com\github\nitf\game\parkour\event\UserUnregisterEvent;
+use com\github\nitf\infrastructure\repository\UserDataRepository;
 use pocketmine\event\Listener;
 
 class ParkourGameListener implements Listener
@@ -30,5 +33,29 @@ class ParkourGameListener implements Listener
         $player = $user->getPlayer();
 
         $player->sendMessage("退出しました");
+    }
+
+    /**
+     * @param StartParkourEvent $event
+     * パルクールを開始したら、開始時間のスタンプを保存する
+     */
+    public function onStartParkour(StartParkourEvent $event): void
+    {
+        $user = $event->getUser();
+        $userData = $user->getData();
+
+        $userDataRepository = new UserDataRepository();
+
+        $userData["start.time"] = $event->getTime()->getTimestamp();
+        $userDataRepository->update($user->getName(), $userData);
+    }
+
+    public function onFinishParkour(FinishParkourEvent $event): void
+    {
+        $user = $event->getUser();
+        $userData = $user->getData();
+
+        $startTime = $userData["start.time"];
+
     }
 }

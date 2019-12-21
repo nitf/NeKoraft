@@ -16,4 +16,9 @@ interface User
      * @return Player
      */
     public function getPlayer(): Player;
+
+    /**
+     * @return array
+     */
+    public function getData(): array;
 }

@@ -3,7 +3,8 @@
 namespace com\github\nitf\nekoraft;
 
 use com\github\nitf\game\GameDI;
-use com\github\nitf\nekoraft\event\NeKoraftListener;
+use com\github\nitf\game\parkour\listener\ParkourGameListener;
+use com\github\nitf\nekoraft\listener\NeKoraftListener;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 
@@ -25,7 +26,8 @@ class Nekoraft extends PluginBase
 
         /** @var Listener[] $listeners */
         $listeners = [
-            new NeKoraftListener()
+            new NeKoraftListener(),
+            new ParkourGameListener()
         ];
 
         // Register listeners.
